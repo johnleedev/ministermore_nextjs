@@ -1,0 +1,301 @@
+@mixin middle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+};
+@mixin centerWidth {
+  width: 100%;
+  max-width: 1400px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  @media (max-width: 1400px) {
+    width: 90%;
+  }
+  @media (max-width: 800px) {
+    width: 95%;
+  }
+};
+
+
+.Rollbook_presents {
+  @include centerWidth();
+  @include middle();
+  flex-direction: column;
+
+  .popup {
+    position: fixed;
+    top: 40vh;
+    z-index: 9;
+    color: #333;
+    padding: 10px 20px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+
+    img {
+      width: 300px;
+    }
+    
+  }
+  
+  .popup-active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .department_main {
+    padding-top: 100px;
+    @media (max-width: 800px) { 
+      padding-top: 20px;
+    }
+    
+    .maintitle-box {
+      margin-bottom: 30px;
+
+      .maintitle {
+        font-size: 40px;
+        text-align: center;
+      }
+    }
+  }
+
+  .yeardate_box {
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    @media (max-width: 1200px) { 
+      width: 80%;
+    }
+    @media (max-width: 800px) { 
+      width: 90%;
+    }    
+
+    .yeardate_btn {
+      width: 50px;
+      height: 50px;
+      @include middle();
+      font-size: 30px;
+    }
+    .yeardate_btn:hover {
+      cursor: pointer;
+    }
+    .yeardate_list {
+      width: 100px;
+      height: 50px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      @include middle();
+      margin: 0 10px;
+      @media (max-width: 800px) { 
+        flex-direction: column;
+        height: 70px;
+        margin: 0 5px;
+      } 
+    }
+    .selected {
+      border: 3px solid rgb(180, 230, 202);
+    }
+    .yeardate_list:hover {
+      cursor: pointer;
+      border: 3px solid rgb(180, 230, 202);
+    }
+  }
+
+  .personal_box {
+    width: 70%;
+    gap: 10px;
+    @media (max-width: 1200px) { 
+      width: 80%;
+    }
+    @media (max-width: 800px) { 
+      width: 90%;
+    }
+
+    .personal_list {
+      display: flex;
+      min-height: 100px;
+      margin: 5px;
+      gap: 5px;
+
+      .namebox {
+        width: 30%;
+        border: 1px solid rgb(180, 230, 202);
+        @include middle();
+        @media (max-width: 800px) { 
+          flex-direction: column;
+        }
+        h3 {
+          font-size: 18px;
+          margin: 0 10px;
+        }
+        p {
+          font-size: 14px;
+          color: #717171;
+          margin: 0 5px;
+        }
+      }
+      .present-row {
+        width: 70%;
+        border: 1px dashed #ccc;
+        @include middle();
+        gap: 10px;
+
+        .present-box,
+        .absent-box {
+          width: 40%;
+          height: 70%;
+          border: 1px solid #ccc;
+          border-radius: 10px;
+          @include middle();
+          cursor: pointer;
+
+          img {
+            width: 50px;
+            filter: grayscale(100%);
+            opacity: 0.5;
+          }
+        }
+        .ispresent {
+          border: 3px solid rgb(180, 230, 202);
+          img {
+            filter: none;
+            opacity: 1;
+          }
+        }
+        .isabsent {
+          border: 3px solid rgb(255, 86, 86);
+          img {
+            filter: none;
+            opacity: 1;
+          }
+        }
+        .present-box:hover {
+          border: 1px solid rgb(43, 206, 114);
+        }
+        .absent-box:hover {
+          border: 1px solid rgb(255, 86, 86);
+        }
+      }
+
+    }
+
+  }
+  
+  .attendance-container {
+    width: 100%;
+    margin: 0 auto;
+    
+    .attendance-body {
+      overflow-x: auto; /* 가로 스크롤 활성화 */
+      overflow-y: hidden; /* 세로 스크롤 방지 */
+      white-space: nowrap; /* 자식 요소를 한 줄로 표시 */
+      
+      .attendance-topbox {
+        width: 150vw;
+        border-bottom: 1px solid #333;
+      }
+      .attendance-bottombox {
+        width: 100%;
+      }
+      .attendance-row {
+        display: flex;
+        align-items: center;
+ 
+        .datebox {
+          position: sticky; /* 상단 고정 */
+          top: 0;
+          left: 0;
+          z-index: 2;
+          flex-shrink: 0;
+          width: 100px;
+          font-weight: bold;
+          text-align: center;
+          padding: 10px;
+          background-color: #f5f5f5;
+          border-right: 1px solid #ccc;
+          @media (max-width: 1200px) { 
+            width: 80px;
+          }
+          @media (max-width: 800px) { 
+            width: 60px;
+          }
+        }
+        .attendance-date {
+          min-width: 70px;
+          text-align: center;
+          padding: 10px;
+          font-weight: bold;
+          border-right: 1px solid #ccc;
+          @media (max-width: 1200px) { 
+            min-width: 70px;
+          }
+          @media (max-width: 800px) { 
+            min-width: 50px;
+          }
+        }
+        .attendance-status {
+          min-width: 70px;
+          @include middle();
+          padding: 10px;
+          border-right: 1px dashed #ccc;
+          @media (max-width: 1200px) { 
+            min-width: 70px;
+          }
+          @media (max-width: 800px) { 
+            min-width: 50px;
+          }
+
+          img {
+            width: 20px;
+          }
+        }
+      }
+    }
+   
+  }
+  
+  
+  
+
+  .dep_buttonbox {
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 200px;
+    @media (max-width: 1200px) { 
+      width: 80%;
+    }
+    @media (max-width: 800px) { 
+      width: 90%;
+    }
+
+    .link_btn {
+      width: 180px;
+      height: 50px;
+      margin-right: 10px;
+      border-radius: 10px;
+      font-size: 20px;
+      border: 1px solid #ccc;
+      @include middle();
+      @media (max-width: 1200px) { 
+        font-size: 18px;
+      }
+      @media (max-width: 800px) { 
+        font-size: 16px;
+      }
+    }
+    .link_btn:hover {
+      cursor: pointer;
+      border: 1px solid #333;
+    }
+  }
+
+  
+}

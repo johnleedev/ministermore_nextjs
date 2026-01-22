@@ -1,0 +1,405 @@
+@mixin middle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+};
+
+
+.department-admin {
+  padding-top: 50px;
+  margin-bottom: 200px;
+  @media (max-width: 600px) { 
+    padding-top: 10px;
+  }
+
+  > .inner {
+    width: 100%;
+    margin-top: 30px;
+    @include middle;
+    padding-bottom: 100px;
+    flex-direction: column;
+    
+    .maintitle-box {
+      margin-bottom: 50px;
+
+      .maintitle {
+        font-size: 35px;
+        text-align: center;
+      }
+    }
+
+    .inputbox {
+      width: 100%;
+      min-height: 50px;
+      position: relative;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      
+      .name {
+        width: 150px;
+        font-size: 18px;
+        @include middle;
+      }
+      > input,
+      > .input {
+        width: 90%;
+        min-height: 40px;
+        padding: 4px 5px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+        border-radius: 5px;
+        color: #777;
+        font-size: 15px;
+        font-weight: 300;
+      }
+      textarea {
+        width: 90%;
+        resize: none;
+      }
+      
+      .title-cover {
+        width: 100%;
+        margin-bottom: 30px;
+        @media (max-width: 800px) {
+         display: none;
+        }
+        
+        .title-row {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          width: 100%;
+          @media (max-width: 800px) {
+            flex-direction: column;
+          }
+
+          .third {
+            width: 33%;
+          }
+          .quarter {
+            width: 25%;
+          }
+          .title-box {
+            text-align: center;
+            @media (max-width: 800px) {
+              width: 100%;
+            }
+          }
+          .title-btn-box {
+            @media (max-width: 800px) {
+              width: 100%;
+            }
+          }
+          .title-vertical-bar {
+            width: 2px;
+            height: 20px;
+            background-color: #ccc;
+          }
+        }
+     
+      }
+
+      .inputBox-cover {
+        width: 100%;
+
+        .inputBox-row {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-bottom: 5px;
+          padding-bottom: 20px;
+          margin-bottom: 20px;
+          
+          @media (max-width: 800px) {
+            flex-direction: column;
+            border-bottom: 1px dashed #ccc;
+          }
+      
+          
+          .third {
+            width: 33%;
+          }
+          .quarter {
+            width: 25%;
+          }
+          .inputBox-inputbox {
+            @include middle();
+            @media (max-width: 800px) {
+              width: 100%;
+              margin-top: 10px;
+              margin-bottom: 10px;
+            }
+        
+            .formobile {
+              display: none;
+              color: #8a8a8a;
+              @media (max-width: 800px) {
+                display: block;
+                width: 25%;
+                @include middle();
+              }
+            }
+
+            
+            h1 {
+              font-size: 20px;
+            }
+            > input {
+              width: 95%;
+              min-height: 40px;
+              padding: 4px 5px;
+              border: 1px solid #ccc;
+              box-sizing: border-box;
+              border-radius: 5px;
+              color: #333;
+              font-size: 15px;
+              font-weight: 500;
+              text-align: center;
+              @media (max-width: 800px) {
+                min-height: 50px;
+                width: 70%;
+              }
+            }
+            .dropdownBox-row {
+              width: 95%;
+              display: flex;
+              align-items: center;
+              @media (max-width: 800px) {
+                min-height: 50px;
+                width: 70%;
+              }
+
+              .dropdownBox {
+                border: 1px solid #dedede;
+                border-radius: 5px;
+                padding: 2px;
+                width: 100%;
+                min-height: 40px;
+                outline: none;
+                font-size: 15px;
+              }
+            }
+
+          }
+
+          .inputBox-btnBox {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            @media (max-width: 800px) {
+              width: 90%;
+            }
+
+            .inputBox-input-btn {
+              width: 48%;
+              height: 38px;
+              border: 1px solid #ccc;
+              border-radius: 5px;
+              background-color: #fff;
+              @include middle();
+              @media (max-width: 800px) {
+                height: 50px;
+                margin: 10px 0;
+              }
+            }
+            .inputBox-input-btn:hover {
+              cursor: pointer;
+              border: 1px solid #878787;
+            }
+          }
+
+         
+        
+          
+        }
+
+        .emptybox {
+          width: 100%;
+          text-align: center;
+          margin: 30px 0;
+        }
+      }
+      
+    }
+    
+    .buttonbox {
+      width: 400px;
+      height: 50px;
+      left: 0;
+      right: 0;
+      margin: 20px auto;
+      display: flex;
+      justify-content: center;
+
+      .button {
+        width: 150px;
+        height: 40px;
+        background-color: #333;
+        border-radius: 10px;
+        margin-left: 20px;
+        margin-right: 20px;
+        @include middle;
+
+        p {
+          font-weight: 700;
+          font-size: 16px;
+        }
+      }
+      .button:hover {
+        opacity: 0.9;
+        cursor: pointer;
+      }
+    }
+
+   
+  }
+
+  .Modal {
+
+    .modal-backcover {
+      position: absolute;
+      width: 100vw;
+      min-height: 200vh;
+      top: 0;
+      left: 0;
+      z-index: 8;
+      opacity: 0.6;
+      background-color: #000;
+    }
+    .modal-maincover {
+      position: absolute;
+      width: 100vw;
+      top: 0;
+      left: 0;
+      z-index: 9;
+      display: flex;
+      justify-content: center;
+      padding-top: 50px;
+    }
+  
+  }
+
+}
+
+
+.modal-addinput {
+  width: 50%;
+  height: auto;
+  background-color: #fff;
+  border-radius: 20px;
+  padding: 50px;
+  font-size: 14px;
+  @media (max-width: 1200px) {
+    width: 70%;
+  }
+  @media (max-width: 800px) {
+    width: 80%;
+  }
+  
+  .header-close-box {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 50px;
+    .header {
+      h1 {
+        font-size: 20px;
+      }
+    }
+    .close-btn {
+
+    }
+    .close-btn:hover {
+      opacity: 0.7;
+      cursor: pointer;
+    }
+  }
+
+  .department-add-cover {
+    margin-bottom: 50px;
+
+    .department-add-row {
+      width: 100%;
+      @include middle();
+      flex-direction: column;
+      margin-bottom: 20px;
+
+      .department-add-title {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 20px;
+        p {
+          font-size: 18px;
+        }
+      }
+      .department-add-content {
+        width: 100%;
+        @include middle();
+
+        > input {
+          width: 50%;
+          min-height: 40px;
+          padding: 4px 5px;
+          border: 1px solid #ccc;
+          box-sizing: border-box;
+          border-radius: 5px;
+          color: #333;
+          font-size: 15px;
+          font-weight: 500;
+          text-align: center;
+          @media (max-width: 1200px) {
+            width: 70%;
+          }
+          @media (max-width: 800px) {
+            width: 80%;
+          }
+        }
+        .dropbox-box {
+          width: 50%;
+          @media (max-width: 1200px) {
+            width: 70%;
+          }
+          @media (max-width: 800px) {
+            width: 80%;
+          }
+
+          .dropdownBox {
+            border: 1px solid #dedede;
+            border-radius: 5px;
+            padding: 2px;
+            width: 100%;
+            min-height: 40px;
+            outline: none;
+            font-size: 15px;
+          }
+        }
+        
+      }
+    }
+  }
+  
+  .btn-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    
+    .btn {
+      padding: 5px 25px;
+      border: 1px solid #b1b1b1;
+      margin: 0 5px;
+      border-radius: 5px;
+      background-color: #fff;
+
+      p {
+        color: #333;
+      }
+    }  
+    .btn:hover {
+      cursor: pointer;
+      border: 1px solid #333;
+    }
+  }
+
+}
+
