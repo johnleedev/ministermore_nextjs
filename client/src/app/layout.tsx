@@ -1,6 +1,15 @@
 import type { Metadata } from "next";
 import "./globals.scss";
 import RecoilRootProvider from "../components/RecoilRootProvider";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import Script from "next/script";
+
+declare global {
+  interface Window {
+    naver: any;
+  }
+}
 
 export const metadata: Metadata = {
   title: "사역자모아",
@@ -31,11 +40,13 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <RecoilRootProvider>
+          <Header />
           {children}
+          <Footer />
         </RecoilRootProvider>
-        <script 
+        <Script type="text/javascript"
           src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=3t8vhilfqg"
-        ></script>
+        ></Script>
       </body>
     </html>
   );

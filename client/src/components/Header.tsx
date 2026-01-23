@@ -15,11 +15,11 @@ const Header: React.FC = () => {
   const loginPath = useRecoilValue(recoilLoginPath);
 
   const menus = [
-    { title: "구인구직", url:"/recruit", 
+    { title: "구인구직", url:"/recruit/minister", 
       links: [
-        {title:"사역자", subUrl:"/recruit"}, 
-        {title:"찬양대/방송/직원", subUrl:"/recruit/recruitchurchlist"}, 
-        {title:"학교/기관/단체", subUrl:"/recruit/recruitinstitutelist"}, 
+        {title:"사역자", subUrl:"/recruit/minister"}, 
+        {title:"찬양대/방송/직원", subUrl:"/recruit/church"}, 
+        {title:"학교/기관/단체", subUrl:"/recruit/institute"}, 
       ]
     },
     // { title: "사역자", url:"/minister", 

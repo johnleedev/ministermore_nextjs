@@ -53,6 +53,7 @@ interface RecruitProps {
 }
 
 
+
 export default function Main(props:any) {
 
 	const router = useRouter();
@@ -190,7 +191,6 @@ export default function Main(props:any) {
 	return (
 		<div className='main'>
 
-      <Header/>
       {/* 상단 배너 이미지 + 텍스트 */}
       <div className="main__top__banner">
         <img src={`${MainURL}/images/main.png`} alt="메인 배너" className="main__top__banner__img" />
@@ -248,7 +248,7 @@ export default function Main(props:any) {
                       className="main__recruit__item"
                       onClick={() => {
                         countUp('recruitview');
-                        router.push(`/recruit/recruitdetail?id=${item.id}`);
+                        router.push(`/recruit/minister/detail/${item.id}`);
                         window.scrollTo(0, 0);
                       }}
                     >
@@ -457,8 +457,6 @@ export default function Main(props:any) {
     
       
            
-			<Footer />
-
 		</div>
 	);
 }

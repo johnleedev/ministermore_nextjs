@@ -50,6 +50,7 @@ const geocodeAddress = async (address) => {
 // 주소를 좌표로 변환하는 API 엔드포인트
 router.post('/geocode', async (req, res) => {
   const { address } = req.body;
+  console.log(address);
   
   if (!address) {
     return res.status(400).json({ error: '주소가 필요합니다.' });
@@ -57,7 +58,7 @@ router.post('/geocode', async (req, res) => {
   
   try {
     const coordinates = await geocodeAddress(address);
-    
+    console.log('coordinates', coordinates);
     if (coordinates) {
       res.json({
         success: true,

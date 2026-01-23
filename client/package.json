@@ -23,6 +23,7 @@
     "sass": "^1.75.0"
   },
   "devDependencies": {
+    "@types/navermaps": "^3.9.1",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-datepicker": "^6.2.0",
