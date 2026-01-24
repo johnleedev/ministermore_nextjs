@@ -3,7 +3,7 @@
 import React, { useMemo, useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import '../ForListPage.scss';
-import './pages/MinisterPageList.scss';
+// import './pages/MinisterPageList.scss';
 import axios from 'axios';
 import MainURL from '../../MainURL';
 import Header from '../../components/Header';
@@ -69,11 +69,7 @@ export default function MinisterPageList() {
 
   return (
     <div>
-      <Header />
-      <div>
-        {/* Minister List Content */}
-      </div>
-      <Footer />
+
     </div>
   )
 }

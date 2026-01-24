@@ -4,8 +4,6 @@ import { useState } from 'react';
 import '../Company.scss';
 import axios from 'axios';
 import MainURL from '../../../MainURL';
-import Header from '../../../components/Header';
-import Footer from '../../../components/Footer';
 
 export default function Advertise() {
 
@@ -58,34 +56,30 @@ export default function Advertise() {
  
 
   return (
-    <div>
-      <Header/>
-      <div className="company">
+    <div className="company">
 
-        <div className="inner">
+    <div className="inner">
 
-          <div className="subpage__main">
-            <div className="subpage__main__title">광고및제휴</div>
-            <div className="subpage__main__content" style={{display:'flex', alignItems:'center', justifyContent:'center', flexDirection:'column'}}>
-              
-              <p style={{marginBottom:'10px'}}>아래 메일로 문의 바랍니다.</p>
-              <p>yeplat@naver.com</p>
-
-            </div>
-          </div>
-        </div>
-
-
-        <div className="inner">
-
+      <div className="subpage__main">
+        <div className="subpage__main__title">광고및제휴</div>
+        <div className="subpage__main__content" style={{display:'flex', alignItems:'center', justifyContent:'center', flexDirection:'column'}}>
           
+          <p style={{marginBottom:'10px'}}>아래 메일로 문의 바랍니다.</p>
+          <p>yeplat@naver.com</p>
 
         </div>
-
-
-
       </div>
-      <Footer/>
     </div>
+
+
+    <div className="inner">
+
+      
+
+    </div>
+
+
+
+  </div>
   );
 }

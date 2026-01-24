@@ -1,9 +1,11 @@
 import { atom } from "recoil";
 import { recoilPersist } from 'recoil-persist';
 
+const storage = typeof window !== 'undefined' ? window.sessionStorage : undefined;
+
 const { persistAtom } = recoilPersist({
   key: 'ministermore', 
-  storage: sessionStorage,
+  storage: storage,
 });
 
 export const recoilLoginState = atom({
@@ -39,8 +41,8 @@ export const recoilKaKaoLoginData = atom({
   key: "kakaoLoginData",
   default: {
     APIKEY : 'cc1f48e0203e8c71fad8928db95cb4ef',
-    REDIRECT_URI_Auth : 'https://ministermore.co.kr/login/loginsns'
-    // REDIRECT_URI_Auth : 'http://localhost:3000/login/loginsns'
+    // REDIRECT_URI_Auth : 'https://ministermore.co.kr/login/loginsns'
+    REDIRECT_URI_Auth : 'http://localhost:3000/login/loginsns'
   },
 });
 

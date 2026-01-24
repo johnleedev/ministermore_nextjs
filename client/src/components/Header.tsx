@@ -28,22 +28,22 @@ const Header: React.FC = () => {
     //     // {title:"사역지", subUrl:"/worship"}, 
     //   ]
     // },
-    { title: "예배사역", url:"/worship", 
-      links: [
-        {title:"적용찬양찾기", subUrl:"/worship"}, 
-        {title:"콘티만들기", subUrl:"/worship/conti"}, 
-      ]
-    },
-    { title: "서비스", url:"/service", 
-      links: [
-        {title:"모바일전단지(소개)", subUrl:"/service/notice"},
-        {title:"모바일전단지(행사)", subUrl:"/service/event"},
-      ]
-    },
+    // { title: "예배사역", url:"/worship", 
+    //   links: [
+    //     {title:"적용찬양찾기", subUrl:"/worship"}, 
+    //     {title:"콘티만들기", subUrl:"/worship/conti"}, 
+    //   ]
+    // },
+    // { title: "서비스", url:"/service", 
+    //   links: [
+    //     {title:"모바일전단지(소개)", subUrl:"/service/notice"},
+    //     {title:"모바일전단지(행사)", subUrl:"/service/event"},
+    //   ]
+    // },
     { title: "커뮤니티", url:"/community", 
       links: [
         {title:"공지사항", subUrl:"/community"},   
-        {title:"중고장터", subUrl:"/community/usedmarket"},
+        {title:"중고장터", subUrl:"/community/used"},
         // {title:"익명게시판", subUrl:"/community"},
         
       ]

@@ -6,8 +6,6 @@ import { FaAngleDoubleRight } from "react-icons/fa";
 import { IoIosMail } from "react-icons/io";
 import { useRecoilValue } from "recoil";
 import { recoilKaKaoLoginData, recoilNaverLoginData } from "../../../RecoilStore";
-import Header from "../../../components/Header";
-import Footer from "../../../components/Footer";
 
 export default function LogisterPage() {
   
@@ -28,7 +26,6 @@ export default function LogisterPage() {
    
   return (
     <div>
-      <Header/>
       <div className="login">
       
         <div className="inner">
@@ -103,7 +100,6 @@ export default function LogisterPage() {
 
   
       </div>
-      <Footer/>
     </div>
   );
 }

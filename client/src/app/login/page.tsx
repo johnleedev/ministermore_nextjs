@@ -7,8 +7,6 @@ import { useRouter } from 'next/navigation';
 import MainURL from "../../MainURL";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { recoilKaKaoLoginData, recoilLoginPath, recoilLoginState, recoilNaverLoginData, recoilUserData } from "../../RecoilStore";
-import Header from "../../components/Header";
-import Footer from "../../components/Footer";
 
 export default function LoginPage() {
  
@@ -34,7 +32,7 @@ export default function LoginPage() {
 
   const handleLogin = async () => {
     await axios
-     .post(`${MainURL}/login/loginemail`, {
+     .post(`${MainURL}/api/login/loginemail`, {
       loginAccount : loginAccount,
       loginPasswd : loginPasswd,
       userURL : 'email'
@@ -55,7 +53,7 @@ export default function LoginPage() {
           authDepartment : res.data.authDepartment,
           authGroup: res.data.authGroup
         })
-        window.location.replace('/');
+        router.replace('/');
        } else {
         if (res.data.which === 'email') {
           alert('가입되어 있지 않은 이메일 계정입니다.');  
@@ -73,7 +71,6 @@ export default function LoginPage() {
   
   return (
     <div>
-      <Header/>
       <div className="login">
 
      
@@ -168,7 +165,6 @@ export default function LoginPage() {
 
 
       </div>
-      <Footer/>
     </div>
   );
 }

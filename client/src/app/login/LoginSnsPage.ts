@@ -4,9 +4,9 @@ import { useEffect } from "react";
 import axios from "axios";
 import '../Login.scss'
 import { useRouter, useSearchParams } from 'next/navigation';
-import MainURL from "../../../MainURL";
+import MainURL from "../../MainURL";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { recoilKaKaoLoginData, recoilLoginPath, recoilLoginState, recoilNaverLoginData, recoilUserData } from "../../../RecoilStore";
+import { recoilKaKaoLoginData, recoilLoginPath, recoilLoginState, recoilNaverLoginData, recoilUserData } from "../../RecoilStore";
 
 export default function LoginSnsPage() {
 
@@ -31,7 +31,7 @@ export default function LoginSnsPage() {
   const requestToken = async () => { 
     if (code && !state) {
     axios
-      .post(`${MainURL}/login/loginsnstoken`, {
+      .post(`${MainURL}/api/login/loginsnstoken`, {
         sort : 'kakao',
         client_id: KAKAO_API_KEY,
         redirect_uri: KAKAO_REDIRECT_URI,
@@ -41,12 +41,13 @@ export default function LoginSnsPage() {
       })
       .then((res) => {
         axios
-          .post(`${MainURL}/login/login`, {
+          .post(`${MainURL}/api/login/login`, {
             url: 'kakao',
             AccessToken: res.data,
           })
           .then((res: any) => {
             if (res.data.isUser === true) {
+              console.log('res.data.isUser', res.data.isUser);
               localStorage.setItem("refreshToken", res.data.refreshToken);
               setIsLogin(true);
               setUserData({
@@ -61,7 +62,7 @@ export default function LoginSnsPage() {
                 authDepartment : res.data.authDepartment,
                 authGroup: res.data.authGroup
               })
-              window.location.replace(loginPath || '/');
+              router.replace(loginPath || '/');
             } else if (res.data.isUser === false) {
               sessionStorage.setItem('snsLoginData', JSON.stringify({data:res.data, sort:'sns'}));
               router.push('/login/logisterDetail');
@@ -74,7 +75,7 @@ export default function LoginSnsPage() {
       });
     } else if (code && state === NAVER_STATE) {
       axios
-        .post(`${MainURL}/login/loginsnstoken`, {
+        .post(`${MainURL}/api/login/loginsnstoken`, {
           sort : 'naver',
           client_id: NAVER_CLIENT_ID,
           code: code,
@@ -84,7 +85,7 @@ export default function LoginSnsPage() {
         })
         .then((res) => {
           axios
-            .post(`${MainURL}/login/login`, {
+            .post(`${MainURL}/api/login/login`, {
               url: 'naver',
               AccessToken: res.data,
             })
@@ -104,7 +105,7 @@ export default function LoginSnsPage() {
                   authDepartment : res.data.authDepartment,
                   authGroup: res.data.authGroup
                 })
-                window.location.replace(loginPath || '/');
+                router.replace(loginPath || '/');
               } else if (res.data.isUser === false) {
                 sessionStorage.setItem('snsLoginData', JSON.stringify({data:res.data, sort:'sns'}));
                 router.push('/login/logisterDetail');
@@ -123,7 +124,5 @@ export default function LoginSnsPage() {
   }, []);
 
    
-  return (
-    <div></div>
-  )
+  
 }

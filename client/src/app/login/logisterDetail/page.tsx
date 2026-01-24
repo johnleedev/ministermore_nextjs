@@ -110,7 +110,7 @@ export default function LogisterDetailPage() {
   const handleCheckAccount = async () => {
     const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(logisterAccount);
     if (regex) {
-      const res = await axios.get(`${MainURL}/login/logincheckaccount/${logisterAccount}`)
+      const res = await axios.get(`${MainURL}/api/login/logincheckaccount/${logisterAccount}`)
       if (res.data) { 
         alert('중복된 이메일 계졍이 있습니다.')
         setLogisterAccountCheck(false);
@@ -128,7 +128,7 @@ export default function LogisterDetailPage() {
       email : logisterAccount
     }
     await axios
-     .post(`${MainURL}/login/loginaccountauth`, userData)
+     .post(`${MainURL}/api/login/loginaccountauth`, userData)
      .then((res)=>{
        if (res.data) {
           setLogisterAccountAuthNum(JSON.stringify(res.data.num));
@@ -141,7 +141,6 @@ export default function LogisterDetailPage() {
    
   return (
     <div>
-      <Header/>
       <div className="login">
       
         <div className="inner">
@@ -459,7 +458,6 @@ export default function LogisterDetailPage() {
 
 
     </div>
-    <Footer/>
     </div>
   );
 }

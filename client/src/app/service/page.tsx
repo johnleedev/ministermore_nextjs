@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import './ServiceMain.scss';
+// import './ServiceMain.scss';
 import { useRouter } from 'next/navigation';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
