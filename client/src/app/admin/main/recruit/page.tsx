@@ -161,7 +161,12 @@ export default function RegisterRecruit( props: any) {
  
   const [postID, setPostID] = useState('');
   
-  const userData = sessionStorage.getItem('user');
+  const [userData, setUserData] = useState<string | null>(null);
+
+  useEffect(() => {
+    const item = sessionStorage.getItem('user');
+    setUserData(item);
+  }, []);
 
   const [source, setSource] = useState('');
   const [title, setTitle] = useState('');
@@ -409,6 +414,44 @@ export default function RegisterRecruit( props: any) {
     } catch (err) {
       console.error('작업중 상태 제거 실패', err);
       alert('작업중 상태 제거에 실패했습니다.');
+    }
+  };
+
+  // [추가] 현재 페이지의 모든 항목 작업중 상태 일괄 제거 함수
+  const clearAllRecruitEditing = async () => {
+    // 현재 페이지에서 editingUser가 있는 항목들만 필터링
+    const itemsWithEditing = list.filter(item => item.editingUser);
+    
+    if (itemsWithEditing.length === 0) {
+      alert('작업중인 항목이 없습니다.');
+      return;
+    }
+
+    if (!window.confirm(`현재 페이지의 ${itemsWithEditing.length}개 항목의 작업중 상태를 모두 해제하시겠습니까?`)) {
+      return;
+    }
+
+    try {
+      // 모든 항목에 대해 병렬로 작업중 상태 제거
+      await Promise.all(
+        itemsWithEditing.map(item => 
+          axios.post(`${MainURL}/api/recruitwork/clearrecruitediting`, {
+            postID: item.id,
+          })
+        )
+      );
+      
+      // 리스트에서도 모두 제거
+      setList(prev => prev.map(row => 
+        itemsWithEditing.some(item => item.id === row.id) 
+          ? { ...row, editingUser: '' } 
+          : row
+      ));
+      setRefresh(!refresh);
+      alert(`${itemsWithEditing.length}개 항목의 작업중 상태가 해제되었습니다.`);
+    } catch (err) {
+      console.error('작업중 상태 일괄 제거 실패', err);
+      alert('작업중 상태 일괄 제거에 실패했습니다.');
     }
   };
 
@@ -690,6 +733,32 @@ export default function RegisterRecruit( props: any) {
               </div>
             )}
 
+            {/* 작업중 상태 일괄 해제 버튼 - 크롤링 탭에만 표시 */}
+            {listSort === '크롤링' && list.length > 0 && list.some(item => item.editingUser) && (
+              <div style={{marginBottom: '15px', display: 'flex', justifyContent: 'flex-end'}}>
+                <button
+                  onClick={clearAllRecruitEditing}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    backgroundColor: '#ff9800',
+                    color: '#fff',
+                    border: 'none',
+                    padding: '10px 20px',
+                    borderRadius: '5px',
+                    fontSize: '14px',
+                    fontWeight: '600',
+                    cursor: 'pointer',
+                    minWidth: '150px',
+                    boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+                  }}
+                >
+                  전체 작업중 해제 ({list.filter(item => item.editingUser).length}개)
+                </button>
+              </div>
+            )}
+
             <div className="recruitBox">
               { displayList.length > 0
                 ?
@@ -840,7 +909,7 @@ export default function RegisterRecruit( props: any) {
                             onClick={async ()=>{
                               if (window.confirm('정말 삭제하시겠습니까?')) {
                                 try {
-                                  const res = await axios.post(`${MainURL}/recruitwork/deleterecruitpre`, {
+                                  const res = await axios.post(`${MainURL}/api/recruitwork/deleterecruitpre`, {
                                     id: item.id
                                   });
                                   if (res.data.success) {
@@ -967,7 +1036,7 @@ export default function RegisterRecruit( props: any) {
                                 onClick={async ()=>{
                                   if (window.confirm('정말 삭제하시겠습니까?')) {
                                     try {
-                                      const res = await axios.post(`${MainURL}/recruitwork/deleterecruit`, {
+                                      const res = await axios.post(`${MainURL}/api/recruitwork/deleterecruit`, {
                                         id: item.id,
                                         saveUser: getUserName(userData)
                                       });
@@ -1066,7 +1135,7 @@ export default function RegisterRecruit( props: any) {
                         ? { id: postID }
                         : { id: postID, saveUser: getUserName(userData) };
                       
-                      const res = await axios.post(`${MainURL}/recruitwork/${endpoint}`, params);
+                      const res = await axios.post(`${MainURL}/api/recruitwork/${endpoint}`, params);
                       
                       if (res.data.success) {
                         alert('삭제되었습니다.');

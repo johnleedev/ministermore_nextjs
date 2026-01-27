@@ -75,7 +75,7 @@ export default function CommunityPage({ noticeList, totalCount, currentPageProp 
     })
     .then(()=>{
       window.scrollTo(0, 0);
-      router.push(`/community/noticedetail?id=${post.id}`);
+      router.push(`/community/detail/notice/${post.id}`);
     }).catch((error: any)=>{
       console.error(error);
     })

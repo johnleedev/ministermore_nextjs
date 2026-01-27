@@ -1,6 +1,6 @@
 'use client';
 import React, { useCallback, useEffect, useState } from 'react';
-import '../Admin.scss';
+import '../../Admin.scss';
 import MainURL from '../../../../MainURL';
 import axios from 'axios';
 import { Line } from 'react-chartjs-2';
@@ -41,17 +41,6 @@ export default function AdminManage ( props: any) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // 게시글 가져오기 (최신 등록글)
-  const fetchPosts = async () => {
-    const url = `${MainURL}/recruitminister/work/getrecruitmanage`;
-    const res = await axios.get(url)
-    if (res.data.resultData) {
-      const copy = res.data.resultData;
-      
-    } else {
-      
-    }
-  };
 
   // 방문자 통계 가져오기 (ip별, 전체)
   const fetchVisitStats = useCallback(async () => {
@@ -59,19 +48,19 @@ export default function AdminManage ( props: any) {
     setError(null);
     try {
       // 1. IP별 방문자 통계
-      const ipRes = await axios.get(`${MainURL}/admin/homeusercount/statistics`);
+      const ipRes = await axios.get(`${MainURL}/api/admin/homeusercount/statistics`);
       setVisitStatsByIp(ipRes.data || []);
       // 2. 전체 메인화면 접속수
-      const mainRes = await axios.get(`${MainURL}/admin/countall?type=mainconnect`);
+      const mainRes = await axios.get(`${MainURL}/api/admin/countall?type=mainconnect`);
       setMainConnectStats(mainRes.data || []);
       // 3. recruit 상세페이지 접속수
-      const recruitRes = await axios.get(`${MainURL}/admin/countall?type=recruitview`);
+      const recruitRes = await axios.get(`${MainURL}/api/admin/countall?type=recruitview`);
       setRecruitViewStats(recruitRes.data || []);
       // 4. 뉴스 클릭수
-      const newsRes = await axios.get(`${MainURL}/admin/countall?type=newsview`);
+      const newsRes = await axios.get(`${MainURL}/api/admin/countall?type=newsview`);
       setNewsViewStats(newsRes.data || []);
       // 5. 찬양 클릭수
-      const praiseRes = await axios.get(`${MainURL}/admin/countall?type=praisewordclick`);
+      const praiseRes = await axios.get(`${MainURL}/api/admin/countall?type=praisewordclick`);
       setPraiseViewStats(praiseRes.data || []);
     } catch (err: any) {
       setError('방문자 통계 데이터를 불러오지 못했습니다.');
@@ -81,7 +70,6 @@ export default function AdminManage ( props: any) {
   }, []);
 
   useEffect(() => {
-    fetchPosts();
     fetchVisitStats();
   }, [refresh, listSort]); 
 

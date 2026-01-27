@@ -1,10 +1,16 @@
 'use client';
+import { useEffect, useState } from 'react';
 import '../Admin.scss'; 
 import { useRouter } from 'next/navigation';
 
 export default function Main( props: any) {
   const router = useRouter();
-  const userData = sessionStorage.getItem('user');
+  const [data, setData] = useState<string | null>(null);
+
+  useEffect(() => {
+    const item = sessionStorage.getItem('user');
+    setData(item);
+  }, []);
 
   return (
     <div className="AdminContainer">
@@ -21,7 +27,7 @@ export default function Main( props: any) {
           사역게시판
         </div>
         {
-          userData === 'johnleedev' && (
+          data === 'johnleedev' && (
             <>
               <div className='amdin_Main_Btn' onClick={()=>{
                 window.scrollTo(0, 0);
@@ -41,7 +47,7 @@ export default function Main( props: any) {
      
         
         {
-          userData === 'johnleedev' && (
+          data === 'johnleedev' && (
             <>
               {/* <div className='amdin_Main_Btn' onClick={()=>{
                 window.scrollTo(0, 0);

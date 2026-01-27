@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation';
 import ReactDOM from 'react-dom';
 // import { toast } from 'react-toastify';
 
-export const sortSubSort = ['전임','준전임','파트', '전임or준전임','전임or파트','준전임or파트', '전임&준전임','전임&파트','준전임&파트','담임'];
+const sortSubSort = ['전임','준전임','파트', '전임or준전임','전임or파트','준전임or파트', '전임&준전임','전임&파트','준전임&파트','담임'];
 
 function DetailModal({ open, onClose, content }: { open: boolean, onClose: () => void, content: string }) {
   if (!open) return null;
@@ -809,8 +809,7 @@ export default function RecruitListManagePre ( props: any) {
 
   // input 이동용 key 배열 (source, title, id, ... 제외, 실제 렌더 순서와 맞춰야 함)
   const editableKeys = [
-    'writer', 'date', 'link', 'church', 'religiousbody', 'location', 'locationDetail', 'address', 'mainpastor', 'homepage', 'churchLogo',
-    'school', 'career', 'sort', 'part', 'partDetail', 'recruitNum', 'pay', 'applydoc', 'applyhow', 'applytime', 'etcNotice', 'inquiry'
+    'date', 'link', 'church', 'religiousbody', 'location', 'locationDetail', 'address', 'homepage', 'etcNotice', 'inquiry'
   ];
 
   // 방향키 이동 핸들러
@@ -1165,7 +1164,7 @@ export default function RecruitListManagePre ( props: any) {
                   borderRight: '2px solid #eee',
                 }}>링크</th>
                 {/* 나머지 헤더 (source, title, link 제외) */}
-                {['writer','date','church','religiousbody','location','locationDetail','address','mainpastor','homepage','churchLogo','school','career','sort','part','partDetail','recruitNum','pay','applydoc','applyhow','applytime','etcNotice','inquiry'].map((key) => (
+                {['date','church','religiousbody','location','locationDetail','address','homepage','etcNotice','inquiry'].map((key) => (
                   <th
                     key={key}
                     style={{
@@ -1174,26 +1173,13 @@ export default function RecruitListManagePre ( props: any) {
                       color: redKeys.includes(key) ? '#e74c3c' : undefined
                     }}
                   >
-                    {key === 'writer' ? '작성자'
-                      : key === 'date' ? '날짜'
+                    {  key === 'date' ? '날짜'
                       : key === 'church' ? '교회명'
                       : key === 'religiousbody' ? '교단'
                       : key === 'location' ? '지역'
                       : key === 'locationDetail' ? '상세지역'
                       : key === 'address' ? '주소'
-                      : key === 'mainpastor' ? '담임목사'
                       : key === 'homepage' ? '홈페이지'
-                      : key === 'churchLogo' ? '로고'
-                      : key === 'school' ? '학력'
-                      : key === 'career' ? '경력'
-                      : key === 'sort' ? '구분'
-                      : key === 'part' ? '파트'
-                      : key === 'partDetail' ? '파트상세'
-                      : key === 'recruitNum' ? '모집인원'
-                      : key === 'pay' ? '사례'
-                      : key === 'applydoc' ? '지원서류'
-                      : key === 'applyhow' ? '지원방법'
-                      : key === 'applytime' ? '모집기간'
                       : key === 'etcNotice' ? '기타사항'
                       : key === 'inquiry' ? '문의'
                       : key
@@ -1296,7 +1282,7 @@ export default function RecruitListManagePre ( props: any) {
                     </td>
                     {/* 나머지 셀 렌더링 (source, title, link 제외) */}
                     {Object.keys(item).map((key) => {
-                      if (key === 'source' || key === 'title' || key === 'link' || key === 'customInput' || key === 'workday' || key === 'workTimeSunDay' || key === 'workTimeWeek' || key === 'dawnPray' || key === 'welfare' || key === 'insurance' || key === 'severance') return null;
+                      if (key === 'source' || key === 'title' || key === 'link' || key === 'customInput' || key === 'workday' || key === 'workTimeSunDay' || key === 'workTimeWeek' || key === 'dawnPray' || key === 'welfare' || key === 'insurance' || key === 'severance' || key === 'writer' || key === 'mainpastor' || key === 'churchLogo' || key === 'school' || key === 'career' || key === 'sort' || key === 'part' || key === 'partDetail' || key === 'recruitNum' || key === 'pay' || key === 'applydoc' || key === 'applyhow' || key === 'applytime') return null;
 
                       return (
                         (key !== 'customInput' && key !== 'id') ? (
@@ -1878,7 +1864,6 @@ export default function RecruitListManagePre ( props: any) {
                                   fontSize: 14,
                                   textAlign: 'center',
                                   padding: '2px 4px',
-                                 
                                   border: '1px solid #ddd',
                                   borderRadius: '3px',
                                 }}
@@ -2015,7 +2000,7 @@ export default function RecruitListManagePre ( props: any) {
                 ))
               ) : (
                 <tr>
-                  <td colSpan={32} style={{textAlign: 'center'}}>등록된 글이 없습니다.</td>
+                  <td colSpan={16} style={{textAlign: 'center'}}>등록된 글이 없습니다.</td>
                 </tr>
               )}
             </tbody>

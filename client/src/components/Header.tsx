@@ -43,7 +43,7 @@ const Header: React.FC = () => {
     { title: "커뮤니티", url:"/community", 
       links: [
         {title:"공지사항", subUrl:"/community"},   
-        {title:"중고장터", subUrl:"/community/used"},
+        // {title:"중고장터", subUrl:"/community/used"},
         // {title:"익명게시판", subUrl:"/community"},
         
       ]

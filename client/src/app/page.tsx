@@ -12,7 +12,7 @@ export default async function Page() {
   } catch (error) {
     console.error("데이터 로드 실패:", error);
   }
-
+ 
   return (
     <div>
       <Main initialRecruitList={ministerList} />

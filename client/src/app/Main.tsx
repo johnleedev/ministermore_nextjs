@@ -116,105 +116,98 @@ export default function Main({ initialRecruitList }: MainProps) {
         </div>
       </div>
 
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        viewport={{ once: true, amount: 0.2 }}
-      >
-        <div className="main__box1">
-          <div className="inner">
-            <div className="main__recruit__header">
-              <h2>최신 채용공고</h2>
-              <button 
-                className="main__recruit__more"
-                onClick={() => {
-                  window.scrollTo(0, 0);
-                  router.push('/recruit');
-                }}
-              >
-                더보기 <FaArrowRight />
-              </button>
-            </div>
-            
-            <div className="main__recruit__section">
-              <div className="main__recruit__list">
-                {isLoading ? (
-                  <div className="main__recruit__loading"><p>채용공고를 불러오는 중...</p></div>
-                ) : recruitList.length === 0 ? (
-                  <div className="main__recruit__empty"><p>현재 등록된 채용공고가 없습니다.</p></div>
-                ) : (
-                  recruitList.map((item, index) => {
-                    // 데이터 파싱 에러 방지 처리
-                    let part = [{sort: '전임', content: ''}];
-                    let pay = [{sort: '전임', paySort: 'select', selectCost: '', inputCost: ''}];
-                    try {
-                      if(item.part) part = JSON.parse(item.part);
-                      if(item.pay) pay = JSON.parse(item.pay);
-                    } catch(e) { console.error("JSON 파싱 에러", e); }
+      <div className="main__box1">
+        <div className="inner">
+          <div className="main__recruit__header">
+            <h2>최신 채용공고</h2>
+            <button 
+              className="main__recruit__more"
+              onClick={() => {
+                window.scrollTo(0, 0);
+                router.push('/recruit');
+              }}
+            >
+              더보기 <FaArrowRight />
+            </button>
+          </div>
+          
+          <div className="main__recruit__section">
+            <div className="main__recruit__list">
+              {isLoading ? (
+                <div className="main__recruit__loading"><p>채용공고를 불러오는 중...</p></div>
+              ) : recruitList.length === 0 ? (
+                <div className="main__recruit__empty"><p>현재 등록된 채용공고가 없습니다.</p></div>
+              ) : (
+                recruitList.map((item, index) => {
+                  // 데이터 파싱 에러 방지 처리
+                  let part = [{sort: '전임', content: ''}];
+                  let pay = [{sort: '전임', paySort: 'select', selectCost: '', inputCost: ''}];
+                  try {
+                    if(item.part) part = JSON.parse(item.part);
+                    if(item.pay) pay = JSON.parse(item.pay);
+                  } catch(e) { console.error("JSON 파싱 에러", e); }
 
-                    return (
-                      <div
-                        key={index} 
-                        className="main__recruit__item"
-                        onClick={() => {
-                          countUp('recruitview');
-                          router.push(`/recruit/minister/detail/${item.id}`);
-                          window.scrollTo(0, 0);
-                        }}
-                      >
-                        <div className="main__recruit__content">
-                          <div className="main__recruit__top">
-                            <div className="main__recruit__church">
-                              <img src={`${MainURL}/images/recruit/religiousbody/${item.religiousbody}.jpg`} alt={item.religiousbody} />
-                              <span className="church-name">{item.church}</span>
-                            </div>
-                            <div className="main__recruit__date"><span>{item.date}</span></div>
+                  return (
+                    <div
+                      key={index} 
+                      className="main__recruit__item"
+                      onClick={() => {
+                        countUp('recruitview');
+                        router.push(`/recruit/minister/detail/${item.id}`);
+                        window.scrollTo(0, 0);
+                      }}
+                    >
+                      <div className="main__recruit__content">
+                        <div className="main__recruit__top">
+                          <div className="main__recruit__church">
+                            <img src={`${MainURL}/images/recruit/religiousbody/${item.religiousbody}.jpg`} alt={item.religiousbody} />
+                            <span className="church-name">{item.church}</span>
                           </div>
-                          <div className="main__recruit__title">
-                            <h3>{renderPreview(cleanTitle(item.title), 40)}</h3>
+                          <div className="main__recruit__date"><span>{item.date}</span></div>
+                        </div>
+                        <div className="main__recruit__title">
+                          <h3>{renderPreview(cleanTitle(item.title), 40)}</h3>
+                        </div>
+                        <div className="main__recruit__details">
+                          <div className="main__recruit__info">
+                            <span className="location">{item.location} {item.locationDetail}</span>
+                            <span className="divider">|</span>
+                            <span className="sort">{item.sort}</span>
+                            {part[0]?.content && (
+                              <>
+                                <span className="divider">|</span>
+                                <span className="part">{renderPreview(part[0].content, 15)}</span>
+                              </>
+                            )}
                           </div>
-                          <div className="main__recruit__details">
-                            <div className="main__recruit__info">
-                              <span className="location">{item.location} {item.locationDetail}</span>
-                              <span className="divider">|</span>
-                              <span className="sort">{item.sort}</span>
-                              {part[0]?.content && (
-                                <>
-                                  <span className="divider">|</span>
-                                  <span className="part">{renderPreview(part[0].content, 15)}</span>
-                                </>
-                              )}
-                            </div>
-                            <div className="main__recruit__pay">
-                              {(pay[0]?.inputCost === '교회내규에따라' || pay[0]?.inputCost === '협의후결정') ? (
-                                <span>{pay[0].inputCost}</span>
-                              ) : (
-                                <span>
-                                  {pay[0]?.selectCost === '' && pay[0]?.inputCost !== '' 
-                                    ? `${pay[0]?.sort}: ${pay[0]?.inputCost}`
-                                    : `${pay[0]?.sort}: ${pay[0]?.paySort} ${pay[0]?.selectCost}`
-                                  }
-                                </span>
-                              )}
-                            </div>
+                          <div className="main__recruit__pay">
+                            {(pay[0]?.inputCost === '교회내규에따라' || pay[0]?.inputCost === '협의후결정') ? (
+                              <span>{pay[0].inputCost}</span>
+                            ) : (
+                              <span>
+                                {pay[0]?.selectCost === '' && pay[0]?.inputCost !== '' 
+                                  ? `${pay[0]?.sort}: ${pay[0]?.inputCost}`
+                                  : `${pay[0]?.sort}: ${pay[0]?.paySort} ${pay[0]?.selectCost}`
+                                }
+                              </span>
+                            )}
                           </div>
                         </div>
                       </div>
-                    );
-                  })
-                )}
-              </div>
+                    </div>
+                  );
+                })
+              )}
             </div>
-            
-            <a className="kakaoBtnBox" href='http://pf.kakao.com/_Xzwrn' target='_blank'>
-              <Image src="/login/kakao.png" alt='kakao' width={50} height={50} />
-              <p>카카오채널</p>
-              <p>문의하기</p>
-            </a>
-          </div>  
-        </div>
-      </motion.div>
+          </div>
+          
+          <a className="kakaoBtnBox" href='http://pf.kakao.com/_Xzwrn' target='_blank'>
+            <Image src="/login/kakao.png" alt='kakao' width={50} height={50} />
+            <p>카카오채널</p>
+            <p>문의하기</p>
+          </a>
+        </div>  
+      </div>
 
       {/* 공식 인스타 배너 */}
       <div className="main_adv_banner" style={{borderBottom:'1px solid #BDBDBD'}}>

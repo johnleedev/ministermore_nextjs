@@ -62,6 +62,23 @@ router.get('/getnoticeposts/:page', async (req, res) => {
 });
 
 
+// 특정 게시글 가져오기
+router.get('/getnoticepost/:postId', (req, res) => {
+  const { postId } = req.params;
+  boarddb.query(`
+    SELECT * FROM noticePosts WHERE id = ${postId}
+  `, function(error, result){
+    if (error) {throw error}
+    if (result.length > 0) {
+      res.send(result);  
+      res.end();
+    } else {
+      res.send(false);
+      res.end();
+    }
+  });
+});
+
 
 // 게시글 조회시, 조회수 증가시키기
 router.post('/noticepostsviews', (req, res) => {

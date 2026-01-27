@@ -405,17 +405,7 @@ router.post('/postsrecruitchurch', async (req, res) => {
     school,
     career,
     sort,
-    part,
-    partDetail,
     recruitNum,
-    workday,
-    workTimeSunDay,
-    workTimeWeek,
-    dawnPray,
-    pay,
-    welfare,
-    insurance,
-    severance,
     applydoc,
     applyhow,
     applytime,
@@ -467,9 +457,9 @@ router.post('/postsrecruitchurch', async (req, res) => {
     const insertQuery = `
       INSERT INTO recruitChurch (
         userAccount, source, title, writer, date, link, church, religiousbody, location, locationDetail, address, mainPastor, homepage,
-        school, career, sort, part, partDetail, recruitNum, workday, workTimeSunDay, workTimeWeek, dawnPray, pay,
-        welfare, insurance, severance, applydoc, applyhow, applytime, etcNotice, inquiry, churchLogo, customInput
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        school, career, sort, recruitNum,
+        applydoc, applyhow, applytime, etcNotice, inquiry, churchLogo, customInput
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `;
 
     const values = [
@@ -489,17 +479,7 @@ router.post('/postsrecruitchurch', async (req, res) => {
       school || '',
       career || '',
       sort || '',
-      part || '',
-      partDetail || '',
       recruitNum || '',
-      workday || '',
-      workTimeSunDay || '',
-      workTimeWeek || '',
-      dawnPray || '',
-      pay || '',
-      welfare || '',
-      insurance || '',
-      severance || '',
       applydoc || '',
       applyhow || '',
       applytime || '',
@@ -554,17 +534,7 @@ router.post('/postsrecruitinstitute', async (req, res) => {
     school,
     career,
     sort,
-    part,
-    partDetail,
     recruitNum,
-    workday,
-    workTimeSunDay,
-    workTimeWeek,
-    dawnPray,
-    pay,
-    welfare,
-    insurance,
-    severance,
     applydoc,
     applyhow,
     applytime,
@@ -616,9 +586,9 @@ router.post('/postsrecruitinstitute', async (req, res) => {
     const insertQuery = `
       INSERT INTO recruitInstitute (
         userAccount, source, title, writer, date, link, church, religiousbody, location, locationDetail, address, mainPastor, homepage,
-        school, career, sort, part, partDetail, recruitNum, workday, workTimeSunDay, workTimeWeek, dawnPray, pay,
-        welfare, insurance, severance, applydoc, applyhow, applytime, etcNotice, inquiry, churchLogo, customInput
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        school, career, sort, recruitNum,
+        applydoc, applyhow, applytime, etcNotice, inquiry, churchLogo, customInput
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `;
 
     const values = [
@@ -638,17 +608,7 @@ router.post('/postsrecruitinstitute', async (req, res) => {
       school || '',
       career || '',
       sort || '',
-      part || '',
-      partDetail || '',
       recruitNum || '',
-      workday || '',
-      workTimeSunDay || '',
-      workTimeWeek || '',
-      dawnPray || '',
-      pay || '',
-      welfare || '',
-      insurance || '',
-      severance || '',
       applydoc || '',
       applyhow || '',
       applytime || '',
