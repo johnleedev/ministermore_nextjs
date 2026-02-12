@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import './Mypage.scss';
 import axios from 'axios';
-import MainURL from '../../../../client_react/src/MainURL'; // 경로가 올바른지 확인 필요
+import MainURL from '../../MainURL'; // 경로가 올바른지 확인 필요
 import { useRecoilState } from 'recoil';
 import { recoilLoginState, recoilUserData } from '../../RecoilStore';
 import { useRouter } from 'next/navigation'; // next/router 대신 next/navigation 사용

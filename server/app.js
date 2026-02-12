@@ -42,14 +42,15 @@ app.use('/api/noticeboard', NoticeBoardRouter);
 var UsedBoardRouter = require('./routers/board/UsedBoard');
 app.use('/api/usedboard', UsedBoardRouter);
 
-const RollbookHomeRouter = require('./routers/rollbook/List');
-const RollbookPresentsRouter = require('./routers/rollbook/Presents');
-const RollbookAdminRouter = require('./routers/rollbook/Admin');
-const RollbookAuthRouter = require('./routers/rollbook/AuthList');
-app.use('/api/rollbooklist', RollbookHomeRouter);
-app.use('/api/rollbookpresents', RollbookPresentsRouter);
-app.use('/api/rollbookadmin', RollbookAdminRouter);
-app.use('/api/rollbookauth', RollbookAuthRouter);
+const RollbookChurchRouter = require('./routers/rollbook/RollbookChurch');
+const RollbookDepartRouter = require('./routers/rollbook/RollbookDepart');
+const RollbookGroupRouter = require('./routers/rollbook/RollbookGroup');
+const RollbookStudentsRouter = require('./routers/rollbook/RollbookStudents');
+app.use('/api/rollbookchurch', RollbookChurchRouter);
+app.use('/api/rollbookdepart', RollbookDepartRouter);
+app.use('/api/rollbookgroup', RollbookGroupRouter);
+app.use('/api/rollbookstudents', RollbookStudentsRouter);
+
 
 const ChurchbookletbookletsRouter = require('./routers/booklet/ChurchMain');
 app.use('/api/churchbookletbooklets', ChurchbookletbookletsRouter);

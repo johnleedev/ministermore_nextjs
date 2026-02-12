@@ -5,7 +5,7 @@ import './PraiseMain.scss';
 import '../ForListPage.scss';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
-import MainURL from '../../../../client_react/src/MainURL';
+import MainURL from '../../MainURL';
 import { themesList } from '../../DefaultData';
 import { MdOutlineKeyboardDoubleArrowDown } from "react-icons/md";
 

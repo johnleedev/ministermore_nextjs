@@ -78,7 +78,7 @@ router.post('/login', async (req, res) => {
     // refreshToken 만들기
     const refreshToken = jwt.sign({ type: 'JWT', USER_ID: userEmail }, SECRET_KEY, {
       expiresIn: '30d',
-      issuer: 'churchbooklet'
+      issuer: 'ministermore'
     });
 
     // 회원인지 파악하기
@@ -134,7 +134,7 @@ router.post('/loginsocial/apple', async (req, res) => {
     // refreshToken 만들기
     const refreshToken = jwt.sign({ type: 'JWT', USER_ID: userEmail }, SECRET_KEY, {
       expiresIn: '30d',
-      issuer: 'churchbooklet'
+      issuer: 'ministermore'
     });
 
     // 회원인지 파악하기
@@ -189,7 +189,7 @@ router.post('/loginsocial/google', async (req, res) => {
     // refreshToken 만들기
     const refreshToken = jwt.sign({ type: 'JWT', USER_ID: userEmail }, SECRET_KEY, {
       expiresIn: '30d',
-      issuer: 'churchbooklet'
+      issuer: 'ministermore'
     });
 
     // 회원인지 파악하기
@@ -236,7 +236,7 @@ router.post('/loginemail', async (req, res) => {
   // refreshToken 만들기
   const refreshToken = jwt.sign({ type: 'JWT', USER_ID: loginAccount }, SECRET_KEY, {
     expiresIn: '30d',
-    issuer: 'churchbooklet'
+    issuer: 'ministermore'
   });
   try {
     commondb.query(`
@@ -310,7 +310,7 @@ router.post('/verifytoken', (req,res)=>{
           } else {
             // 다시 발급해주기
             var refreshToken = jwt.sign({type: 'JWT', USER_ID : userAccount}, SECRET_KEY, {
-              expiresIn: '30d', issuer: 'churchbooklet'
+              expiresIn: '30d', issuer: 'ministermore'
             });
             userData.resultData = result[0];
             userData.refreshToken = refreshToken;
@@ -405,7 +405,7 @@ router.post('/loginaccountauth', async function(req, res){
     // refreshToken 만들기
     const refreshTokenCopy = jwt.sign({ type: 'JWT', USER_ID: email }, SECRET_KEY, {
       expiresIn: '30d',
-      issuer: 'churchbooklet'
+      issuer: 'ministermore'
     });
     const resultData = {num : random_code, refreshToken : refreshTokenCopy};
 

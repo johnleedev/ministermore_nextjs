@@ -267,7 +267,7 @@ export default function RecruitList ({ recruitList, totalCount, currentPageProp 
     setIsSearching(true);
     setCurrentPage(1);
     
-    const res = await axios.post(`${MainURL}/recruitminister//recruitsearchunified`, {
+    const res = await axios.post(`${MainURL}/recruitminister/recruitsearchunified`, {
       searchWord: searchWord || '',
       sort: selectedSort,
       location: selectedLocation,
@@ -298,7 +298,7 @@ export default function RecruitList ({ recruitList, totalCount, currentPageProp 
     selectedLocation: sl,
     selectedReligiousbody: sr,
   }: { searchWord: string; selectedSort: string[]; selectedLocation: string[]; selectedReligiousbody: string[]; }) => {
-    const res = await axios.post(`${MainURL}/recruitminister//recruitsearchunified`, {
+    const res = await axios.post(`${MainURL}/recruitminister/recruitsearchunified`, {
       searchWord: sw || '',
       sort: ss,
       location: sl,

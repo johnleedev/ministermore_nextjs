@@ -1,20 +1,18 @@
 'use client';
-
-import { useEffect } from "react";
+import { useEffect, useState, Suspense } from "react";
 import axios from "axios";
 import '../Login.scss'
 import { useRouter, useSearchParams } from 'next/navigation';
-import MainURL from "../../MainURL";
+import MainURL from "../../../MainURL";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { recoilKaKaoLoginData, recoilLoginPath, recoilLoginState, recoilNaverLoginData, recoilUserData } from "../../RecoilStore";
+import { recoilKaKaoLoginData, recoilLoginPath, recoilLoginState, recoilNaverLoginData, recoilUserData } from "../../../RecoilStore";
 
-export default function LoginSnsPage() {
-
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const code = searchParams.get("code");
-  const state = searchParams.get("state");
+function LoginsnsContent() {
+  const searchParams = useSearchParams(); 
+  const code = searchParams.get('code');
+  const state = searchParams.get('state');
   
+  let router = useRouter();
   const setIsLogin = useSetRecoilState(recoilLoginState);
   const setUserData = useSetRecoilState(recoilUserData);
   const loginPath = useRecoilValue(recoilLoginPath);
@@ -24,12 +22,14 @@ export default function LoginSnsPage() {
   const KAKAO_API_KEY = kakaoLoginData.APIKEY;
   const KAKAO_REDIRECT_URI = kakaoLoginData.REDIRECT_URI_Auth;
 
+  // 네이버 로그인
   const NAVER_CLIENT_ID = naverLoginData.CLIENTID;
   const NAVER_SECRET = naverLoginData.SECRET;
   const NAVER_STATE = "sdfsdfsdf";
 
   const requestToken = async () => { 
     if (code && !state) {
+    // 카카오 로그인 처리
     axios
       .post(`${MainURL}/api/login/loginsnstoken`, {
         sort : 'kakao',
@@ -47,7 +47,6 @@ export default function LoginSnsPage() {
           })
           .then((res: any) => {
             if (res.data.isUser === true) {
-              console.log('res.data.isUser', res.data.isUser);
               localStorage.setItem("refreshToken", res.data.refreshToken);
               setIsLogin(true);
               setUserData({
@@ -62,9 +61,10 @@ export default function LoginSnsPage() {
                 authDepartment : res.data.authDepartment,
                 authGroup: res.data.authGroup
               })
-              router.replace(loginPath || '/');
+              window.location.replace(loginPath);
             } else if (res.data.isUser === false) {
-              sessionStorage.setItem('snsLoginData', JSON.stringify({data:res.data, sort:'sns'}));
+              sessionStorage.setItem('snsLoginData', JSON.stringify({ data: res.data }));
+              sessionStorage.setItem('logisterSort', 'sns');
               router.push('/login/logisterDetail');
             }
           }).catch((err: any) => {
@@ -74,6 +74,7 @@ export default function LoginSnsPage() {
         console.error('kakao 토큰 에러', err);
       });
     } else if (code && state === NAVER_STATE) {
+      // 네이버 로그인
       axios
         .post(`${MainURL}/api/login/loginsnstoken`, {
           sort : 'naver',
@@ -105,9 +106,10 @@ export default function LoginSnsPage() {
                   authDepartment : res.data.authDepartment,
                   authGroup: res.data.authGroup
                 })
-                router.replace(loginPath || '/');
+                window.location.replace(loginPath);
               } else if (res.data.isUser === false) {
-                sessionStorage.setItem('snsLoginData', JSON.stringify({data:res.data, sort:'sns'}));
+                sessionStorage.setItem('snsLoginData', JSON.stringify({ data: res.data }));
+                sessionStorage.setItem('logisterSort', 'sns');
                 router.push('/login/logisterDetail');
               }
             }).catch((err: any) => {
@@ -124,5 +126,15 @@ export default function LoginSnsPage() {
   }, []);
 
    
-  
+  return (
+    <div></div>
+  )
+}
+
+export default function page (props:any) {
+  return (
+    <Suspense fallback={<div></div>}>
+      <LoginsnsContent />
+    </Suspense>
+  );
 }

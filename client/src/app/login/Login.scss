@@ -161,8 +161,9 @@
           justify-content: space-between;
 
           .addBtn {
-            min-width: 70px;
-            text-align: center;
+            min-width: 100px;
+            height: 30px;
+            @include middle();
             border: 1px solid #d7d7d7;
             border-radius: 3px;
             padding: 3px 10px;

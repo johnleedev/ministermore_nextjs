@@ -28,12 +28,12 @@ const Header: React.FC = () => {
     //     // {title:"사역지", subUrl:"/worship"}, 
     //   ]
     // },
-    // { title: "예배사역", url:"/worship", 
-    //   links: [
-    //     {title:"적용찬양찾기", subUrl:"/worship"}, 
-    //     {title:"콘티만들기", subUrl:"/worship/conti"}, 
-    //   ]
-    // },
+    { title: "예배사역", url:"/worship", 
+      links: [
+        {title:"적용찬양찾기", subUrl:"/worship"}, 
+        // {title:"콘티만들기", subUrl:"/worship/conti"}, 
+      ]
+    },
     // { title: "서비스", url:"/service", 
     //   links: [
     //     {title:"모바일전단지(소개)", subUrl:"/service/notice"},
@@ -58,6 +58,7 @@ const Header: React.FC = () => {
 
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState<{ [key: number]: boolean }>({});
+  const [mounted, setMounted] = useState<boolean>(false);
 
   const toggleMenu = () => {
       setMenuOpen(!menuOpen);
@@ -85,6 +86,10 @@ const Header: React.FC = () => {
     
   
   useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 10 && window.scrollY < 100) {
         setMenuOpen(false);
@@ -103,12 +108,12 @@ const Header: React.FC = () => {
         <div className="inner">
           <div className="container header-top-container">
             {
-              isLogin 
+              mounted && isLogin 
               ? <p style={{color:'#fff', marginRight:'20px'}}>{(userData as any).userNickName}님 환영합니다</p>
               : <p style={{color:'#fff', marginRight:'20px'}}>로그인해주세요</p>
             }
             {
-              isLogin 
+              mounted && isLogin 
               ?
               <div className="header-button_wrap">
                 <div className="header-button"
@@ -168,7 +173,7 @@ const Header: React.FC = () => {
                   <div className="header-mobile_menu">
                       <div className="mobile_menu-inner">
                           {
-                            isLogin 
+                            mounted && isLogin 
                             ?
                             <div className="mobile_menu-top">
                               <span className="mobile_menu-announce">{(userData as any).userNickName}님 환영합니다.</span>

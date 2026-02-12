@@ -1,63 +1,30 @@
-'use client';
-
-import React, { useEffect, useState } from 'react';
-// import './Rollbook.scss';
-import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import MainURL from '../../MainURL';
-import Footer from '../../components/Footer';
-import MenuTemplate from './MenuTemplate';
-import { useRecoilState } from 'recoil';
-import { recoilLoginState, recoilUserData } from '../../RecoilStore';
-import Header from '../../components/Header';
+import RollbookList from './RollbookList';
 
-interface ListProps {
-  id : number,
-  isView: string;
-  location : string;
-  churchName: string;
-  religiousbody : string;
-  image: string;
-}
 
-export default function RollbookListPage() {
+ // app/recruit/page.tsx
+export default async function Page({ searchParams }: { searchParams: { page?: string } }) {
+  const currentPage = Number(searchParams.page) || 1; // URL에서 페이지 번호를 가져옴 (없으면 1)
+  let rollbookList = [];
+  let totalCount = 0;
 
-  const router = useRouter();
-  const [isLogin, setIsLogin] = useRecoilState(recoilLoginState);
-  const [userData, setUserData] = useRecoilState(recoilUserData);
-  
-  const [list, setList] = useState<ListProps[]>([]);
-  const [searchWord, setSearchWord] = useState('');
-  const [listAllLength, setListAllLength] = useState<number>(0);
-  const [isResdataFalse, setIsResdataFalse] = useState<boolean>(false);
-
-  const fetchPosts = async () => {
-    const res = await axios.post(`${MainURL}/rollbooklist/getchurchlist`, {
-      
-    })
-    if (res.data.data) {
-      setIsResdataFalse(false);
-      let copy: any = [...res.data.data];
-      copy.reverse();
-      setList(copy);
-      setListAllLength(res.data.count);
-    } else {
-      setListAllLength(0);
-      setIsResdataFalse(true);
+  try {
+    // 현재 페이지 번호를 API 주소에 넣습니다.
+    const res = await axios.get(`${MainURL}/api/rollbookchurch/getchurchlist`);
+    if (res.data) {
+      rollbookList = res.data.data || []; 
+      totalCount = res.data.count || 0;
     }
-  };
-
-  useEffect(() => {
-    fetchPosts();
-  }, []);  
+  } catch (error) {
+    console.error("데이터 로드 실패:", error);
+  }
 
   return (
-    <div>
-      <Header />
-      <div>
-        {/* Rollbook List Content */}
-      </div>
-      <Footer/>
-    </div>
-  )
+    <RollbookList rollbookList={rollbookList} totalCount={totalCount} currentPageProp={currentPage} />
+  );
 }
+
+
+
+

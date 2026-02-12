@@ -9,10 +9,9 @@ import { FaAngleDoubleRight } from "react-icons/fa";
 import { FaCircleCheck } from "react-icons/fa6";
 import { FaCheck } from "react-icons/fa";
 import { CiWarning } from "react-icons/ci";
-import Header from "../../../components/Header";
-import Footer from "../../../components/Footer";
 
-export default function LogisterDetailPage() {
+
+export default function page () {
   
   const router = useRouter();
   const [locationState, setLocationState] = useState<any>(null);
@@ -92,7 +91,7 @@ export default function LogisterDetailPage() {
       alert('이메일 인증을 완료해주세요')
     } else {
       await axios
-      .post(`${MainURL}/login/logisterdo`, {userData})
+      .post(`${MainURL}/api/login/logisterdo`, {userData})
       .then((res)=>{
         if (res.data) {
           alert('가입이 완료되었습니다. 다시 로그인 해주세요.');
@@ -191,7 +190,7 @@ export default function LogisterDetailPage() {
                     <FaCircleCheck size={20} color={checkUsingPolicy ? "#33383f" : "EAEAEA"}/>
                     <label htmlFor="reg_use">[필수] 서비스 이용약관 동의</label>
                   </span>
-                  <a href="http://www.churchbooklet.com/usingpolicy.html" target="_blank" className="agree_link">이용약관 보기</a>
+                  <a href="http://www.ministermore.co.kr/usingpolicy.html" target="_blank" className="agree_link">이용약관 보기</a>
                 </li>
                 <li>
                   <span className="checks"
@@ -202,7 +201,7 @@ export default function LogisterDetailPage() {
                     <FaCircleCheck  size={20} color={checkPersonalInfo ? "#33383f" : "EAEAEA"}/>
                     <label htmlFor="reg_personal">[필수] 개인정보 수집/이용 동의</label>
                   </span>
-                  <a href="http://www.churchbooklet.com/personalinfo.html" target="_blank" className="agree_link">개인정보 수집/이용 보기</a>
+                  <a href="http://www.ministermore.co.kr/personalinfo.html" target="_blank" className="agree_link">개인정보 수집/이용 보기</a>
                 </li>
                 <li>
                   <span className="checks"
